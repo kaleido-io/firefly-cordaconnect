@@ -43,21 +43,23 @@ public class DriverBasedTest {
         long numRetries = 0;
         long timeToWait = random.nextInt(1500);
         while(true) {
-            try{
-               nodeHandle.getRpc().startFlowDynamic(CreateDummyNonceState.class, groupId, "dummy message", Collections.singletonList(counterParty)).getReturnValue().get();
-               return;
+            try {
+                nodeHandle.getRpc().startFlowDynamic(CreateDummyNonceState.class, groupId, "dummy message", Collections.singletonList(counterParty)).getReturnValue().get();
+                return;
             } catch (ExecutionException | InterruptedException e) {
-                if(e.getCause() instanceof NotaryException && numRetries < MAX_RETRIES) {
+                if (e.getCause() instanceof NotaryException && numRetries < MAX_RETRIES) {
                     try {
                         Thread.sleep(timeToWait);
                     } catch (InterruptedException interruptedException) {
+                        numRetries++;
                         continue;
                     }
                     timeToWait += random.nextInt(1500);
                     numRetries++;
                     continue;
                 } else {
-                   numFailures.incrementAndGet();
+                    numFailures.incrementAndGet();
+                    return;
                 }
             }
         }
