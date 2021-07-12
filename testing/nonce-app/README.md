@@ -1,7 +1,7 @@
 Test application to reproduce liveness issue observed in corda
 
 ## PRE-REQS
-- JDK 11 (such as from [https://adoptopenjdk.net/](https://gradle.org/install/))
+- JDK 1.8 (such as from [https://adoptopenjdk.net/](https://gradle.org/install/))
 - gradle ([https://gradle.org/install/](https://gradle.org/install/))
 
 ## BUILD
