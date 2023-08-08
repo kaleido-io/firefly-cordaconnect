@@ -20,7 +20,10 @@ public class WebsocketData {
     private String topic;
 
     public WebsocketData() {
+    }
 
+    public WebsocketData(String topic) {
+        this.topic = topic;
     }
 
     public String getTopic() {

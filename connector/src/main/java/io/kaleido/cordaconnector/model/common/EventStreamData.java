@@ -16,16 +16,37 @@
 
 package io.kaleido.cordaconnector.model.common;
 
+import io.kaleido.cordaconnector.db.entity.EventStreamInfo;
+
 public class EventStreamData {
+    private String id;
     private String name;
-    private int batchSize=1;
-    private int batchTimeoutMS=5000;
-    private int blockedRetryDelaySec=30;
+    private String type = "websocket";
+    private int batchSize = 1;
+    private int batchTimeoutMS = 5000;
+    private int blockedRetryDelaySec = 30;
 
     private ErrorHandling errorHandling = ErrorHandling.BLOCK;
     private WebsocketData websocket;
 
     public EventStreamData() {
+    }
+
+    public EventStreamData(EventStreamInfo eventStreamInfo) {
+        this.name = eventStreamInfo.getName();
+        this.batchSize = eventStreamInfo.getBatchSize();
+        this.batchTimeoutMS = eventStreamInfo.getBatchTimeoutMs();
+        this.blockedRetryDelaySec = eventStreamInfo.getBatchRetryDelaySec();
+        this.errorHandling = eventStreamInfo.getErrorHandling();
+        this.websocket = new WebsocketData(eventStreamInfo.getWebsocketTopic());
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -34,6 +55,14 @@ public class EventStreamData {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getBatchSize() {

@@ -18,7 +18,6 @@ package io.kaleido.cordaconnector.db.entity;
 
 import io.kaleido.cordaconnector.model.common.ErrorHandling;
 import io.kaleido.cordaconnector.model.common.EventStreamData;
-import io.kaleido.cordaconnector.service.EventStream;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -83,7 +82,8 @@ public class EventStreamInfo implements Serializable {
         this.websocketTopic = streamData.getWebsocket().getTopic();
     }
 
-    public EventStreamInfo() {}
+    public EventStreamInfo() {
+    }
 
     public String getId() {
         return id;

@@ -20,6 +20,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties("db")
+@ConfigurationProperties("events")
 public class EventStreamConfig {
 }

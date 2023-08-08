@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        corda_release_version = "4.4"
+        corda_release_version = "4.8"
     }
     repositories {
         mavenCentral()
@@ -29,24 +29,12 @@ apply plugin: 'application'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.springframework.boot'
 
-
-// See https://docs.spring.io/dependency-management-plugin/docs/current/reference/html
-dependencyManagement {
-    dependencies {
-        dependency "org.apache.logging.log4j:log4j-slf4j-impl:2.17.1"
-    }
-}
-
 // Corda serialization requires function parameter names to be included in the class file
 compileJava {
     options.compilerArgs << '-parameters'
 }
 
 dependencies {
-    // CorDapp dependencies
-    implementation project(":cordapp:firefly-contracts")
-    implementation project(":cordapp:firefly-flows")
-
     testCompile "junit:junit:4.12"
 
     // Corda dependencies.
@@ -61,8 +49,9 @@ dependencies {
     implementation ("org.springframework.boot:spring-boot-starter-data-jpa:2.1.15.RELEASE") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
     }
+    implementation "ch.qos.logback:logback-access"
+    implementation "ch.qos.logback:logback-classic"
     implementation "org.springdoc:springdoc-openapi-ui:1.5.2"
-    implementation "org.apache.logging.log4j:log4j-web:2.17.1"
     implementation "org.javassist:javassist:3.23.1-GA"
     runtime "com.h2database:h2:1.4.200"
 }

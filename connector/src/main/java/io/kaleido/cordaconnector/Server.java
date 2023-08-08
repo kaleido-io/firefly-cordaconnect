@@ -16,6 +16,7 @@
 
 package io.kaleido.cordaconnector;
 
+import io.kaleido.cordaconnector.config.LoggingListener;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -26,11 +27,16 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 @EnableAutoConfiguration
 public class Server {
-    private static ConfigurableApplicationContext applicationContext ;
+    private static ConfigurableApplicationContext applicationContext;
+
     public static void main(String[] args) {
+        System.setProperty(
+                "logging.level.org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor",
+                "TRACE");
         SpringApplication app = new SpringApplication(Server.class);
         app.setBannerMode(Banner.Mode.OFF);
         app.setWebApplicationType(WebApplicationType.SERVLET);
+        app.addListeners(new LoggingListener());
         applicationContext = app.run(args);
     }
 

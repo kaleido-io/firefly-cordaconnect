@@ -1,4 +1,2 @@
-include 'cordapp:firefly-contracts'
-include 'cordapp:firefly-flows'
 include 'connector'
 

@@ -17,5 +17,5 @@
 package io.kaleido.cordaconnector.ws;
 
 public enum ClientMessageType {
-    LISTEN, ACK, ERROR
+    LISTEN, LISTENREPLIES, ACK, ERROR
 }
