@@ -1,7 +1,6 @@
-/.idea/
-/.gradle/
-/bin/
-build/
-logs/
+.gradle/
+.metals
+rpc-client/connector/bin/
+rpc-client/connector/build/
 .vscode/launch.json
 *.code-workspace
