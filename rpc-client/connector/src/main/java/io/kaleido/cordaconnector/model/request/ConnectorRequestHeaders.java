@@ -16,29 +16,32 @@
 
 package io.kaleido.cordaconnector.model.request;
 
-public class ConnectorRequest<T> {
-    private T data;
-    private ConnectorRequestHeaders headers;
+import java.util.UUID;
 
-    public ConnectorRequest() {
+public class ConnectorRequestHeaders {
+  private String type;
+  private String id;
+
+  public ConnectorRequestHeaders() {
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public String getId() {
+    if (id == null) {
+      id = UUID.randomUUID().toString();
     }
 
-    public T getData() {
-        return data;
-    }
+    return id;
+  }
 
-    public void setData(T data) {
-        this.data = data;
-    }
+  public void setType(String type) {
+    this.type = type;
+  }
 
-    public ConnectorRequestHeaders getHeaders() {
-        if (headers == null) {
-            headers = new ConnectorRequestHeaders();
-        }
-        return headers;
-    }
-
-    public void setHeaders(ConnectorRequestHeaders headers) {
-        this.headers = headers;
-    }
+  public void setId(String requestId) {
+    this.id = requestId;
+  }
 }

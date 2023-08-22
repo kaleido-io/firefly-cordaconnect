@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import io.kaleido.cordaconnector.logging.LoggingService;
 import io.kaleido.cordaconnector.model.request.ConnectorRequest;
-import io.kaleido.cordaconnector.model.response.ConnectorResponse;
 
 @Service
 public class LoggingServiceImpl implements LoggingService {
@@ -35,7 +34,7 @@ public class LoggingServiceImpl implements LoggingService {
     }
 
     if (!Objects.isNull(body)) {
-      reqMessage.append("requestId=[").append(((ConnectorRequest<?>) body).getId()).append("]");
+      reqMessage.append("requestId=[").append(((ConnectorRequest<?>) body).getHeaders().getId()).append("]");
     }
 
     logger.info("==> {}", reqMessage);

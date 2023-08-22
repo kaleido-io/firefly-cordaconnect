@@ -60,9 +60,11 @@ public class FireflyReceiptNotification {
     this.contractLocation = contractLocation;
   }
 
-  public static FireflyReceiptNotification build(SignedTransaction signedTransaction, CordaRPCOps rpcOps) {
+  public static FireflyReceiptNotification build(String requestId, SignedTransaction signedTransaction,
+      CordaRPCOps rpcOps) {
     FireflyReceiptNotification notification = new FireflyReceiptNotification();
     FireflyReceiptHeaders headers = new FireflyReceiptHeaders();
+    headers.setRequestId(requestId);
     headers.setType("TransactionSuccess");
     notification.setHeaders(headers);
     CoreTransaction coreTransaction = signedTransaction.getCoreTransaction();
@@ -73,17 +75,15 @@ public class FireflyReceiptNotification {
     List<String> outputTypes = getOutputTypesFromTx(coreTransaction);
     Map<String, String> contractLocation = new java.util.HashMap<>();
 
-    AtomicReference<Integer> counter = new AtomicReference<>(0);
+    int counter = 0;
     for (String inputType : inputTypes) {
-      String key = String.format("input-%d", counter.getAndSet(counter.get() + 1));
+      String key = String.format("input-%d", counter++);
       contractLocation.put(key, inputType);
-      counter.getAndSet(counter.get() + 1);
     }
-    counter = new AtomicReference<>(0);
+    counter = 0;
     for (String outputType : outputTypes) {
-      String key = String.format("output-%d", counter.getAndSet(counter.get() + 1));
+      String key = String.format("output-%d", counter++);
       contractLocation.put(key, outputType);
-      counter.getAndSet(counter.get() + 1);
     }
     notification.setContractLocation(contractLocation);
 

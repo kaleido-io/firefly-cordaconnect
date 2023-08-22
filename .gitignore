@@ -1,5 +1,6 @@
 .gradle/
 .metals
+rpc-client/build
 rpc-client/connector/bin/
 rpc-client/connector/build/
 .vscode/launch.json

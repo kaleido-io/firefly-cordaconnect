@@ -31,7 +31,7 @@ public class TransactionController {
 
   @PostMapping("/transactions")
   public ConnectorResponse<TransactionInfo> createTransaction(@RequestBody ConnectorRequest<TransactionData> request) {
-    TransactionInfo res = transactionService.createTransaction(request.getData());
+    TransactionInfo res = transactionService.createTransaction(request.getHeaders().getId(), request.getData());
     return new ConnectorResponse<>(res);
   }
 

@@ -72,7 +72,7 @@ public class TransactionService {
   @Autowired
   private ReceiptService receiptService;
 
-  public TransactionInfo createTransaction(TransactionData data) {
+  public TransactionInfo createTransaction(String requestId, TransactionData data) {
     logger.info("createTransaction: {}", data);
     String flowClassType = data.getFlowInitiatorClass();
 
@@ -110,7 +110,7 @@ public class TransactionService {
       try {
         final SignedTransaction result = future.get();
         logger.info("Signed tx: {}", result);
-        FireflyReceiptNotification receipt = FireflyReceiptNotification.build(result, this.getRPCOps());
+        FireflyReceiptNotification receipt = FireflyReceiptNotification.build(requestId, result, this.getRPCOps());
         receiptService.broadcastReceipt(receipt);
         TransactionInfo txInfo = TransactionInfo.build(result, this.getRPCOps());
         return txInfo;
